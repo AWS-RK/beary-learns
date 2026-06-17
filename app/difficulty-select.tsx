@@ -33,7 +33,7 @@ export default function DifficultySelect() {
 
     setQuestions(questions as any);
     speak(DIFFICULTY_ENCOURAGEMENT[difficulty], 0.85);
-    router.push(`/(sessions)/${subject}`);
+    router.push(`/(sessions)/${subject}` as any);
   };
 
   const SUBJECT_LABELS: Record<string, string> = {
