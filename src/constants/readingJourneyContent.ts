@@ -93,7 +93,7 @@ export const JOURNEY_UNITS: UnitContent[] = [
         choices: ['three', 'thick', 'two'],
       },
       {
-        passage: 'She whispered the math answer to her friend. They did not want to throw the test.',
+        passage: 'She whispered the math answer to her friend. She did not want her friend to fail.',
         question: 'What did she whisper?',
         answer: 'the math answer',
         choices: ['the math answer', 'the wheel', 'the wheat'],
@@ -160,7 +160,7 @@ export const JOURNEY_UNITS: UnitContent[] = [
         choices: ['its tail', 'its coat', 'its braid'],
       },
       {
-        passage: 'She braided her hair and ate some meat with her feet in the pool.',
+        passage: 'She braided her hair and put her feet in the pool to cool down. She ate some meat for lunch.',
         question: 'Where were her feet?',
         answer: 'in the pool',
         choices: ['in the pool', 'on the road', 'in the rain'],
@@ -322,7 +322,7 @@ export const JOURNEY_UNITS: UnitContent[] = [
         passage: 'Many people said the food from their friend was good. Every one of them could have some more.',
         question: 'What did people say about the food?',
         answer: 'it was good',
-        choices: ['it was good', 'it was some water', 'it were from there'],
+        choices: ['it was good', 'it was some water', 'it came from the store'],
       },
       {
         passage: 'Their friend said come and have some water. People were happy because it was cold.',
