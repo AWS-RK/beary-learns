@@ -1,0 +1,139 @@
+import React, { useEffect, useState, useCallback } from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
+import { router } from 'expo-router';
+import { useSessionStore } from '../../src/store/sessionStore';
+import { useProgressStore } from '../../src/store/progressStore';
+import { useSettingsStore } from '../../src/store/settingsStore';
+import { useSpeechOutput } from '../../src/hooks/useSpeechOutput';
+import { useSoundEffects } from '../../src/hooks/useSoundEffects';
+import { useRewards } from '../../src/hooks/useRewards';
+import { MascotSpeech } from '../../src/components/ui/MascotSpeech';
+import { ReadingExercise } from '../../src/components/exercises/ReadingExercise';
+import { StarBurst } from '../../src/components/rewards/StarBurst';
+import { Confetti } from '../../src/components/rewards/Confetti';
+import { BadgeUnlock } from '../../src/components/rewards/BadgeUnlock';
+import { ENCOURAGEMENT_CORRECT, ENCOURAGEMENT_WRONG, pickRandom } from '../../src/constants/mascotPhrases';
+import { spacing } from '../../src/constants/theme';
+import type { ReadingQuestion } from '../../src/types/exercises';
+
+export default function ReadingSession() {
+  const session = useSessionStore();
+  const progress = useProgressStore();
+  const settings = useSettingsStore();
+  const { speak } = useSpeechOutput();
+  const { play } = useSoundEffects();
+  const { checkAndAwardBadges, calculateStars } = useRewards();
+
+  const [mascotMsg, setMascotMsg] = useState('');
+  const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'celebrate'>('happy');
+  const [mascotAnimate, setMascotAnimate] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [hintUsed, setHintUsed] = useState(false);
+  const [starBurst, setStarBurst] = useState(false);
+  const [starBurstCount, setStarBurstCount] = useState(1);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [currentBadge, setCurrentBadge] = useState<string | null>(null);
+  const [badgeQueue, setBadgeQueue] = useState<string[]>([]);
+
+  const question = session.questions[session.currentIndex] as ReadingQuestion | undefined;
+
+  useEffect(() => {
+    if (!question) return;
+    setMascotMsg(question.audioPrompt);
+    setMascotMood('happy');
+    setHintUsed(false);
+    setDisabled(false);
+    speak(question.audioPrompt, settings.voiceSpeed);
+  }, [session.currentIndex]);
+
+  const handleAnswer = useCallback((choice: string) => {
+    if (disabled || !question) return;
+    setDisabled(true);
+
+    const correct = choice === question.answer;
+    progress.recordAnswer('reading', correct);
+
+    if (correct) {
+      const stars = calculateStars(true, hintUsed, session.wrongAttempts);
+      session.addStars(stars);
+      session.incrementStreak();
+      progress.addStars(stars);
+      progress.updateStreak();
+
+      setStarBurstCount(stars);
+      setStarBurst(true);
+      if (stars === 3) setShowConfetti(true);
+
+      const msg = pickRandom(ENCOURAGEMENT_CORRECT);
+      setMascotMsg(msg);
+      setMascotMood('celebrate');
+      setMascotAnimate(true);
+      speak(msg, settings.voiceSpeed);
+      play(stars === 3 ? 'celebrate' : 'correct');
+
+      const newBadges = checkAndAwardBadges('reading', session.difficulty);
+      if (newBadges.length > 0) {
+        play('badge');
+        setBadgeQueue(newBadges);
+        setCurrentBadge(newBadges[0]);
+      }
+
+      setTimeout(() => {
+        setMascotAnimate(false);
+        if (session.currentIndex + 1 >= session.questions.length) {
+          progress.completeSession('reading');
+          router.replace('/results');
+        } else {
+          session.nextQuestion();
+        }
+      }, 2000);
+    } else {
+      session.incrementWrongAttempts();
+      session.resetStreak();
+      setHintUsed(true);
+
+      const msg = pickRandom(ENCOURAGEMENT_WRONG);
+      setMascotMsg(msg);
+      setMascotMood('thinking');
+      speak(msg, settings.voiceSpeed);
+      play('wrong');
+
+      setTimeout(() => setDisabled(false), 1500);
+    }
+  }, [disabled, question, hintUsed, session, progress, settings, calculateStars, checkAndAwardBadges, play, speak]);
+
+  const handleHearAgain = useCallback(() => {
+    if (!question) return;
+    speak(question.audioPrompt, settings.voiceSpeed * 0.85);
+  }, [question, settings, speak]);
+
+  const handleBadgeClose = () => {
+    const remaining = badgeQueue.slice(1);
+    setBadgeQueue(remaining);
+    setCurrentBadge(remaining[0] ?? null);
+  };
+
+  if (!question) return null;
+
+  return (
+    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+      <MascotSpeech message={mascotMsg} mood={mascotMood} animate={mascotAnimate} />
+
+      <ReadingExercise
+        question={question}
+        difficulty={session.difficulty}
+        disabled={disabled}
+        onAnswer={handleAnswer}
+        onHearAgain={handleHearAgain}
+      />
+
+      <StarBurst visible={starBurst} stars={starBurstCount} onDone={() => setStarBurst(false)} />
+      <Confetti visible={showConfetti} onDone={() => setShowConfetti(false)} />
+      <BadgeUnlock badgeId={currentBadge} onClose={handleBadgeClose} />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flexGrow: 1, padding: spacing.lg, gap: spacing.lg },
+});

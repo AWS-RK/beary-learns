@@ -92,6 +92,27 @@ export const BADGES: Record<string, Badge> = {
     emoji: '💫',
     color: '#FFE66D',
   },
+  READER_START: {
+    id: 'READER_START',
+    name: 'Bookworm Cub',
+    description: 'Complete your first reading exercise',
+    emoji: '📖',
+    color: '#45B7D1',
+  },
+  READER_5: {
+    id: 'READER_5',
+    name: 'Word Explorer',
+    description: 'Read 5 words correctly',
+    emoji: '🔤',
+    color: '#45B7D1',
+  },
+  READER_PRO: {
+    id: 'READER_PRO',
+    name: 'Super Reader',
+    description: 'Complete 5 reading sessions',
+    emoji: '🦉',
+    color: '#45B7D1',
+  },
 };
 
 export const BADGE_IDS = Object.keys(BADGES) as (keyof typeof BADGES)[];

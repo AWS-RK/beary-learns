@@ -9,6 +9,7 @@ import { generateCountingSession } from '../src/engines/countingEngine';
 import { generateAdditionSession } from '../src/engines/additionEngine';
 import { generateSubtractionSession } from '../src/engines/subtractionEngine';
 import { generatePronunciationSession } from '../src/engines/pronunciationEngine';
+import { generateReadingSession } from '../src/engines/readingEngine';
 import { colors, fonts, fontSize, spacing, radius } from '../src/constants/theme';
 import type { Difficulty } from '../src/types/exercises';
 
@@ -29,6 +30,7 @@ export default function DifficultySelect() {
     if (subject === 'counting') questions = generateCountingSession(difficulty);
     else if (subject === 'addition') questions = generateAdditionSession(difficulty);
     else if (subject === 'subtraction') questions = generateSubtractionSession(difficulty);
+    else if (subject === 'reading') questions = generateReadingSession(difficulty);
     else questions = generatePronunciationSession(difficulty);
 
     setQuestions(questions as any);
@@ -41,6 +43,7 @@ export default function DifficultySelect() {
     addition: 'Addition ➕',
     subtraction: 'Subtraction ➖',
     pronunciation: 'Pronunciation 🗣️',
+    reading: 'Reading 📖',
   };
 
   return (

@@ -23,11 +23,17 @@ export interface PronunciationConfig {
   oneListen: boolean;
 }
 
+export interface ReadingConfig {
+  mode: 'word-to-picture' | 'picture-to-word' | 'sentence-to-picture';
+  speakPromptAlways: boolean;
+}
+
 export interface DifficultyConfig {
   counting: CountingConfig;
   addition: MathConfig;
   subtraction: MathConfig;
   pronunciation: PronunciationConfig;
+  reading: ReadingConfig;
   questionsPerSession: number;
   timePressure: boolean;
 }
@@ -45,6 +51,7 @@ export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
       showPictureAlways: true,
       oneListen: false,
     },
+    reading: { mode: 'word-to-picture', speakPromptAlways: true },
     questionsPerSession: 5,
     timePressure: false,
   },
@@ -60,6 +67,7 @@ export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
       showPictureAlways: false,
       oneListen: false,
     },
+    reading: { mode: 'picture-to-word', speakPromptAlways: false },
     questionsPerSession: 7,
     timePressure: false,
   },
@@ -75,6 +83,7 @@ export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
       showPictureAlways: false,
       oneListen: true,
     },
+    reading: { mode: 'sentence-to-picture', speakPromptAlways: false },
     questionsPerSession: 10,
     timePressure: false,
   },

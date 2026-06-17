@@ -20,6 +20,7 @@ const defaultProgress = (): ProgressData => ({
     addition: defaultSubjectProgress(),
     subtraction: defaultSubjectProgress(),
     pronunciation: defaultSubjectProgress(),
+    reading: defaultSubjectProgress(),
   },
   currentStreak: 0,
   lastPlayedDate: null,

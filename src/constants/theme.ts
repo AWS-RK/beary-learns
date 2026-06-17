@@ -17,6 +17,7 @@ export const colors = {
   addition: '#4ECDC4',
   subtraction: '#A78BFA',
   pronunciation: '#F6C90E',
+  reading: '#45B7D1',
 
   // Difficulty colors
   easy: '#6BCB77',
