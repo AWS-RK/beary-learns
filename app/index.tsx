@@ -32,6 +32,10 @@ export default function HomeScreen() {
   }, []);
 
   const handleSubject = (subject: Subject) => {
+    if (subject === 'reading') {
+      router.push('/reading-journey');
+      return;
+    }
     setSubject(subject);
     router.push('/difficulty-select');
   };
