@@ -5,9 +5,12 @@ import { View, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useProgress } from '../src/hooks/useProgress';
 import { colors } from '../src/constants/theme';
+import { useReadingJourneyStore } from '../src/store/readingJourneyStore';
 
 function AppBootstrap() {
   useProgress();
+  const loadJourney = useReadingJourneyStore((s) => s.load);
+  React.useEffect(() => { loadJourney(); }, []);
   return null;
 }
 
