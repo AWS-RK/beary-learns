@@ -60,7 +60,7 @@ export default function ReadingLessonScreen() {
         const wordCorrectCount = allResults.filter((r) => r.correct).length;
         setTimeout(() => {
           router.replace({
-            pathname: '/reading-results',
+            pathname: '/reading-results' as any,
             params: {
               unitNumber: String(unitNumber),
               lessonIndex: String(lessonIndex),

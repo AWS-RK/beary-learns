@@ -73,7 +73,7 @@ export default function ReadingResultsScreen() {
   const handleNextLesson = () => {
     const nextIdx = getNextLessonIndex(unitNumber);
     router.replace({
-      pathname: '/(sessions)/reading-lesson',
+      pathname: '/(sessions)/reading-lesson' as any,
       params: { unitNumber: String(unitNumber), lessonIndex: String(nextIdx) },
     });
   };
@@ -102,7 +102,7 @@ export default function ReadingResultsScreen() {
         <TouchableOpacity style={styles.nextBtn} onPress={handleNextLesson}>
           <Text style={styles.nextBtnText}>Next Lesson →</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.mapBtn} onPress={() => router.replace('/reading-journey')}>
+        <TouchableOpacity style={styles.mapBtn} onPress={() => router.replace('/reading-journey' as any)}>
           <Text style={styles.mapBtnText}>Back to Journey Map</Text>
         </TouchableOpacity>
       </ScrollView>

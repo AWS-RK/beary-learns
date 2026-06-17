@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   const handleSubject = (subject: Subject) => {
     if (subject === 'reading') {
-      router.push('/reading-journey');
+      router.push('/reading-journey' as any);
       return;
     }
     setSubject(subject);

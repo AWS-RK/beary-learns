@@ -35,7 +35,7 @@ export default function ReadingJourneyScreen() {
 
   const handleUnitPress = (unitNumber: number) => {
     const lessonIndex = getNextLessonIndex(unitNumber);
-    router.push({ pathname: '/(sessions)/reading-lesson', params: { unitNumber: String(unitNumber), lessonIndex: String(lessonIndex) } });
+    router.push({ pathname: '/(sessions)/reading-lesson' as any, params: { unitNumber: String(unitNumber), lessonIndex: String(lessonIndex) } });
   };
 
   const greeting = pickRandom(JOURNEY_GREETINGS);
