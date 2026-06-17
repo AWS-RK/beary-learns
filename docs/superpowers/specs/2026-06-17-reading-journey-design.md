@@ -31,7 +31,7 @@ The current `app/(sessions)/reading.tsx` and `src/components/exercises/ReadingEx
 
 ## 3. Unit Structure
 
-7 units in fixed sequence. Each unit unlocks after the previous reaches 75% completion (6 of 8 lessons passed).
+7 units in fixed sequence. Each unit unlocks after the previous reaches 75% completion (6 of 8 lessons passed with a perfect 5/5 score).
 
 | # | Unit | Pattern | Example Words |
 |---|------|---------|---------------|
@@ -53,7 +53,7 @@ Each unit has **8 lessons**. Each lesson has **5 questions** in this fixed order
 Q1: Word Recognition  →  Q2: Read Aloud  →  Q3: Word Recognition  →  Q4: Read Aloud  →  Q5: Comprehension
 ```
 
-A lesson is **passed** when ≥ 3 of 5 questions are answered correctly. The child always sees all 5 questions — no early exit.
+A lesson is **passed** when all 5 questions are answered correctly. The child always sees all 5 questions — no early exit. If she misses any question, she sees encouragement and can retry the lesson immediately.
 
 ### 4a. Exercise Types
 
@@ -80,7 +80,7 @@ A lesson is **passed** when ≥ 3 of 5 questions are answered correctly. The chi
 After Q5:
 - Shows stars earned (up to 3 per question, 15 total maximum)
 - Animated sparkle celebration scaled to score (≥12 stars = full confetti + sound)
-- "Lesson passed!" or "Keep practising!" — never "You failed"
+- "You did it! 👸✨" (all 5 correct) or "So close! Let's try again!" (any missed) — never "You failed"
 - Badge unlock modal fires if a milestone is hit
 - Buttons: "Next Lesson" or "Back to Journey"
 
