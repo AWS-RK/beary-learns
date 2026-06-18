@@ -39,6 +39,8 @@ const adaptiveSvg = Buffer.from(`
 `);
 
 async function main() {
+  const fs = require('fs');
+  fs.mkdirSync(OUT_DIR, { recursive: true });
   await sharp(iconSvg)
     .resize(1024, 1024)
     .png()
