@@ -40,6 +40,15 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.INTERNET"
       ]
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "23f647e5-7a89-4c5e-a550-cf7aef2ed316"
+      }
+    },
+    "owner": "rk_android"
   }
 }
