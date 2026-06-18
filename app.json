@@ -5,13 +5,16 @@
     "version": "1.0.0",
     "scheme": "bearylearns",
     "orientation": "portrait",
-    "icon": "./assets/images/mascot/beary-happy.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#FFF9F0"
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/mascot/beary-happy.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
@@ -30,7 +33,7 @@
       "package": "com.bearylearns.app",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/mascot/beary-happy.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFF9F0"
       },
       "permissions": [
