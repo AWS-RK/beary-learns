@@ -41,6 +41,7 @@ export default function ReadingJourneyScreen() {
   const greeting = pickRandom(JOURNEY_GREETINGS);
 
   const completedUnits = Object.values(units).filter((u) => u.lessonsCompleted >= 6).length;
+  const totalUnits = JOURNEY_UNITS.length;
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -63,11 +64,11 @@ export default function ReadingJourneyScreen() {
         <Text style={styles.crownEmoji}>👑</Text>
         <View style={styles.crownInfo}>
           <Text style={styles.crownTitle}>Princess Reading Crown</Text>
-          <Text style={styles.crownSub}>{completedUnits} of 7 units complete</Text>
+          <Text style={styles.crownSub}>{completedUnits} of {totalUnits} units complete</Text>
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={[styles.scroll, isWide && styles.scrollWide]} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollView} contentContainerStyle={[styles.scroll, isWide && styles.scrollWide]} showsVerticalScrollIndicator={false}>
         {isWide ? (
           <>
             {JOURNEY_UNITS.filter((u) => {
@@ -138,8 +139,9 @@ const styles = StyleSheet.create({
   crownInfo: { flex: 1 },
   crownTitle: { fontFamily: fonts.extraBold, fontSize: fontSize.md, color: '#553C9A' },
   crownSub: { fontFamily: fonts.regular, fontSize: fontSize.sm, color: '#7C3AED' },
+  scrollView: { flex: 1 },
   scroll: { padding: spacing.lg, gap: spacing.md, paddingBottom: 64 },
-  scrollWide: { padding: spacing.lg },
+  scrollWide: { padding: spacing.lg, paddingBottom: 64 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md, marginTop: spacing.md },
   gridItem: { width: '47%' },
 });

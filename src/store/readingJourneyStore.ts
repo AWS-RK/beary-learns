@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { ReadingJourneyProgress, UnitProgress, LessonResult } from '../types/readingJourney';
+import { JOURNEY_UNITS } from '../constants/readingJourneyContent';
 import { useProgressStore } from './progressStore';
 
 const STORAGE_KEY = 'beary_reading_journey';
@@ -18,7 +19,7 @@ const defaultUnitProgress = (unitNumber: number): UnitProgress => ({
 
 const defaultProgress = (): ReadingJourneyProgress => ({
   units: Object.fromEntries(
-    [1, 2, 3, 4, 5, 6, 7].map((n) => [n, defaultUnitProgress(n)])
+    JOURNEY_UNITS.map((u) => [u.unitNumber, defaultUnitProgress(u.unitNumber)])
   ) as Record<number, UnitProgress>,
   totalCorrectWords: 0,
   lastLessonDate: null,
@@ -49,7 +50,7 @@ export const useReadingJourneyStore = create<ReadingJourneyStore>((set, get) => 
         merged.lessonStreakDays = data.lessonStreakDays ?? 0;
         for (const key of Object.keys(data.units ?? {})) {
           const n = Number(key);
-          if (merged.units[n]) merged.units[n] = data.units[n];
+          if (merged.units[n] !== undefined) merged.units[n] = data.units[n];
         }
         set({ ...merged, hydrated: true });
       } else {
@@ -106,7 +107,8 @@ export const useReadingJourneyStore = create<ReadingJourneyStore>((set, get) => 
     };
 
     const updatedUnits = { ...state.units, [unitNumber]: updatedUnit };
-    if (isNowComplete && unitNumber < 7) {
+    const maxUnit = JOURNEY_UNITS[JOURNEY_UNITS.length - 1].unitNumber;
+    if (isNowComplete && unitNumber < maxUnit) {
       updatedUnits[unitNumber + 1] = { ...updatedUnits[unitNumber + 1], unlocked: true };
     }
 
@@ -155,10 +157,13 @@ export const useReadingJourneyStore = create<ReadingJourneyStore>((set, get) => 
       5: 'WORD_WEAVER',
       6: 'SIGHT_WORD_SORCERESS',
       7: 'STORY_QUEEN',
+      8: 'SKATE_STAR',
+      9: 'SEAL_SWIMMER',
+      10: 'PARK_PRINCESS',
     };
     if (isNowComplete && unitBadgeMap[unitNumber]) earn(unitBadgeMap[unitNumber]);
 
-    const allDone = [1,2,3,4,5,6,7].every((n) => updatedUnits[n]?.lessonsCompleted >= 6);
+    const allDone = JOURNEY_UNITS.every((u) => updatedUnits[u.unitNumber]?.lessonsCompleted >= 6);
     if (allDone) earn('READING_PRINCESS');
 
     return newBadges;

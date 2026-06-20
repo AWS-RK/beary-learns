@@ -49,7 +49,7 @@ export function generateLesson(unitNumber: number, lessonIndex: number): Reading
     emoji: lessonWords[1].emoji,
     showPictureHint,
     matchThreshold: 0.75,
-    audioPrompt: `Read this word: ${lessonWords[1].word}`,
+    audioPrompt: 'Your turn! Read this word.',
   };
 
   const q3: WordRecognitionQuestion = {
@@ -66,7 +66,7 @@ export function generateLesson(unitNumber: number, lessonIndex: number): Reading
     emoji: lessonWords[3].emoji,
     showPictureHint,
     matchThreshold: 0.75,
-    audioPrompt: `Read this word: ${lessonWords[3].word}`,
+    audioPrompt: 'Your turn! Read this word.',
   };
 
   const compItem = unit.comprehensionItems[lessonIndex % unit.comprehensionItems.length];
