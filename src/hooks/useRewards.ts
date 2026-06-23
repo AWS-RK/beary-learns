@@ -43,6 +43,13 @@ export function useRewards() {
       // Pronunciation badge
       if (subject === 'pronunciation' && sub.correctAnswers >= 5) earn('WORD_STAR');
 
+      // Reading badges
+      if (subject === 'reading') {
+        if (sub.sessionsCompleted >= 1) earn('READER_START');
+        if (sub.correctAnswers >= 5) earn('READER_5');
+        if (sub.sessionsCompleted >= 5) earn('READER_PRO');
+      }
+
       // Voice hero
       if (session.voiceUsedCount >= 10) earn('VOICE_HERO');
 

@@ -92,6 +92,40 @@ export const BADGES: Record<string, Badge> = {
     emoji: '💫',
     color: '#FFE66D',
   },
+  READER_START: {
+    id: 'READER_START',
+    name: 'Bookworm Cub',
+    description: 'Complete your first reading exercise',
+    emoji: '📖',
+    color: '#45B7D1',
+  },
+  READER_5: {
+    id: 'READER_5',
+    name: 'Word Explorer',
+    description: 'Read 5 words correctly',
+    emoji: '🔤',
+    color: '#45B7D1',
+  },
+  READER_PRO: {
+    id: 'READER_PRO',
+    name: 'Super Reader',
+    description: 'Complete 5 reading sessions',
+    emoji: '🦉',
+    color: '#45B7D1',
+  },
+  // Royal Reading Journey badges
+  SPARKLE_STARTER: { id: 'SPARKLE_STARTER', name: 'Sparkle Starter', description: 'Complete your first Reading Journey lesson', emoji: '✨', color: '#A78BFA' },
+  CRYSTAL_WORDS: { id: 'CRYSTAL_WORDS', name: 'Crystal Words', description: 'Read 5 words correctly in the Journey', emoji: '💎', color: '#60A5FA' },
+  UNICORN_MAGIC: { id: 'UNICORN_MAGIC', name: 'Unicorn Magic', description: 'Complete Unit 1: Magic E', emoji: '🦄', color: '#F472B6' },
+  WHALE_WHISPERER: { id: 'WHALE_WHISPERER', name: 'Whale Whisperer', description: 'Complete Unit 2: th and wh Words', emoji: '🐋', color: '#38BDF8' },
+  MERMAID_VOWELS: { id: 'MERMAID_VOWELS', name: 'Mermaid Vowels', description: 'Complete Unit 3: Vowel Teams', emoji: '🧜‍♀️', color: '#34D399' },
+  DRAGON_TAMER: { id: 'DRAGON_TAMER', name: 'Dragon Tamer', description: 'Complete Unit 4: R-Controlled Vowels', emoji: '🌹', color: '#F87171' },
+  WORD_WEAVER: { id: 'WORD_WEAVER', name: 'Word Weaver', description: 'Complete Unit 5: Compound Words', emoji: '🦋', color: '#FB923C' },
+  SIGHT_WORD_SORCERESS: { id: 'SIGHT_WORD_SORCERESS', name: 'Sight Word Sorceress', description: 'Complete Unit 6: Sight Words', emoji: '🔮', color: '#C084FC' },
+  STORY_QUEEN: { id: 'STORY_QUEEN', name: 'Story Queen', description: 'Complete Unit 7: Comprehension', emoji: '📖', color: '#FBBF24' },
+  ROYAL_PERFECTIONIST: { id: 'ROYAL_PERFECTIONIST', name: 'Royal Perfectionist', description: 'Score 5/5 on any lesson', emoji: '⭐', color: '#F59E0B' },
+  MAGIC_STREAK: { id: 'MAGIC_STREAK', name: 'Magic Streak', description: 'Complete a lesson 3 days in a row', emoji: '🔥', color: '#EF4444' },
+  READING_PRINCESS: { id: 'READING_PRINCESS', name: 'Reading Princess', description: 'Complete ALL 7 units', emoji: '👸', color: '#EC4899' },
 };
 
 export const BADGE_IDS = Object.keys(BADGES) as (keyof typeof BADGES)[];

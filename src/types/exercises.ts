@@ -1,4 +1,4 @@
-export type Subject = 'counting' | 'addition' | 'subtraction' | 'pronunciation';
+export type Subject = 'counting' | 'addition' | 'subtraction' | 'pronunciation' | 'reading';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export interface CountingQuestion {
@@ -27,7 +27,16 @@ export interface PronunciationQuestion {
   matchThreshold: number;
 }
 
-export type Question = CountingQuestion | MathQuestion | PronunciationQuestion;
+export interface ReadingQuestion {
+  type: 'reading';
+  mode: 'word-to-picture' | 'picture-to-word' | 'sentence-to-picture';
+  prompt: string;
+  answer: string;
+  choices: string[];
+  audioPrompt: string;
+}
+
+export type Question = CountingQuestion | MathQuestion | PronunciationQuestion | ReadingQuestion;
 
 export interface AnswerResult {
   correct: boolean;

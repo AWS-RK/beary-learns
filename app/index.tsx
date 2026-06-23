@@ -16,6 +16,7 @@ const SUBJECTS: { id: Subject; label: string; emoji: string; color: string; desc
   { id: 'addition', label: 'Addition', emoji: '➕', color: colors.addition, desc: 'Add numbers!' },
   { id: 'subtraction', label: 'Subtraction', emoji: '➖', color: colors.subtraction, desc: 'Take away!' },
   { id: 'pronunciation', label: 'Pronunciation', emoji: '🗣️', color: colors.pronunciation, desc: 'Say words!' },
+  { id: 'reading', label: 'Reading', emoji: '📖', color: colors.reading, desc: 'Read and learn!' },
 ];
 
 export default function HomeScreen() {
@@ -31,6 +32,10 @@ export default function HomeScreen() {
   }, []);
 
   const handleSubject = (subject: Subject) => {
+    if (subject === 'reading') {
+      router.push('/reading-journey' as any);
+      return;
+    }
     setSubject(subject);
     router.push('/difficulty-select');
   };
